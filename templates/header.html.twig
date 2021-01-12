@@ -1,0 +1,21 @@
+<header>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>
+                <a href="{{ path('index') }}">GDA</a>
+            </h1>
+            <nav class="nav justify-content-center">
+                <a class="nav-link active" href="#">Category 1</a>
+                <a class="nav-link" href="#">Category 2</a>
+                <a class="nav-link disabled" href="#">Category 3</a>
+            </nav>
+            <div>
+                {# {% if app.user is defined %}
+                    <a href="{{ path('profil') }}">{{app.user.firstname}} {{app.user.lastname}}</a> | <a href="{{ path('app_logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Login</a>
+                {% endif %} #}
+            </div>
+        </div>
+    </div>
+</header>
