@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
-     * @Route("/{slug}", name="book_show_front", methods={"GET"})
+     * @Route("/{id}-{slug}", name="book_show_front", methods={"GET"})
      */
     public function show(Book $book): Response
     {
