@@ -1,6 +1,6 @@
 <header>
     <div class="jumbotron">
-        <div class="container">
+        <div class="container d-flex justify-content-between">
             <h1>
                 <a href="{{ path('index') }}">GDA</a>
             </h1>
@@ -10,11 +10,11 @@
                 <a class="nav-link disabled" href="#">Category 3</a>
             </nav>
             <div>
-                {# {% if app.user is defined %}
-                    <a href="{{ path('profil') }}">{{app.user.firstname}} {{app.user.lastname}}</a> | <a href="{{ path('app_logout') }}">Logout</a>
+                {% if app.user.id is defined %}
+                    {# <a href="{{ path('profil') }}">{{app.user.firstname}} {{app.user.lastname}}</a> |  #}<a href="{{ path('app_logout') }}">Logout</a>
                 {% else %}
                     <a href="{{ path('app_login') }}">Login</a>
-                {% endif %} #}
+                {% endif %}
             </div>
         </div>
     </div>
