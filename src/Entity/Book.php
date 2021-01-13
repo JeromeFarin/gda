@@ -50,6 +50,12 @@ class Book
      */
     private $editor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +129,18 @@ class Book
     public function setEditor($editor): self
     {
         $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor($author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

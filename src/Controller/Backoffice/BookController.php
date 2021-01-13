@@ -3,10 +3,9 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Book;
-use App\Entity\Editor;
 use App\Form\BookType;
+use App\Handler\BookHandler;
 use App\Repository\BookRepository;
-use App\Repository\EditorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +18,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class BookController extends AbstractController
 {
+    private BookHandler $bookHandler;
+
+    public function __construct(BookHandler $bookHandler)
+    {
+        $this->bookHandler = $bookHandler;
+    }
+
     /**
      * @Route("/", name="book_index", methods={"GET"})
      */
@@ -39,9 +45,7 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($book);
-            $entityManager->flush();
+            $this->bookHandler->persist($book);
 
             return $this->redirectToRoute('book_index');
         }
@@ -65,22 +69,13 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}/edit", name="book_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Book $book, EditorRepository $editorRepository): Response
+    public function edit(Request $request, Book $book): Response
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
-            /** @var Book $book */
-            $book = $form->getData();
-
-            if ($book->getEditor()) {
-                $book->setEditor($this->getDoctrine()->getRepository(Editor::class)->find($book->getEditor()));
-            }
-
-            $manager->persist($book);
-            $manager->flush();
+            $this->bookHandler->persist($book);
 
             return $this->redirectToRoute('book_index');
         }

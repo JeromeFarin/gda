@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Repository\AuthorRepository;
 use App\Repository\EditorRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -12,10 +13,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BookType extends AbstractType
 {
     private EditorRepository $editorRepository;
+    private AuthorRepository $authorRepository;
 
-    public function __construct(EditorRepository $editorRepository)
+    public function __construct(EditorRepository $editorRepository, AuthorRepository $authorRepository)
     {
         $this->editorRepository = $editorRepository;
+        $this->authorRepository = $authorRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -29,7 +32,20 @@ class BookType extends AbstractType
         }
 
         if ($options['data']->getEditor()) {
-            $data = $options['data']->getEditor()->getId();
+            $dataEditor = $options['data']->getEditor()->getId();
+        }
+
+        $authors = [];
+
+        foreach ($this->authorRepository->findAll() as $author) {
+            if (!$name = $author->getCompletName()) {
+                continue;
+            }
+            $authors[$name] = $author->getId();
+        }
+
+        if ($options['data']->getAuthor()) {
+            $dataAuthor = $options['data']->getAuthor()->getId();
         }
 
         $builder
@@ -38,9 +54,13 @@ class BookType extends AbstractType
             ->add('isbn')
             ->add('resume')
             ->add('price')
+            ->add('author', ChoiceType::class, [
+                'choices'  => $authors,
+                'data' => $dataAuthor ?? null
+            ])
             ->add('editor', ChoiceType::class, [
                 'choices'  => $editors,
-                'data' => $data ?? null
+                'data' => $dataEditor ?? null
             ]);
     }
 
