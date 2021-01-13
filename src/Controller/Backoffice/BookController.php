@@ -3,8 +3,10 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Book;
+use App\Entity\Editor;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Repository\EditorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,13 +65,22 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}/edit", name="book_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Book $book): Response
+    public function edit(Request $request, Book $book, EditorRepository $editorRepository): Response
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $manager = $this->getDoctrine()->getManager();
+            /** @var Book $book */
+            $book = $form->getData();
+
+            if ($book->getEditor()) {
+                $book->setEditor($this->getDoctrine()->getRepository(Editor::class)->find($book->getEditor()));
+            }
+
+            $manager->persist($book);
+            $manager->flush();
 
             return $this->redirectToRoute('book_index');
         }

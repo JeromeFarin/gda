@@ -44,6 +44,12 @@ class Book
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Editor::class, inversedBy="books")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $editor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +111,18 @@ class Book
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getEditor()
+    {
+        return $this->editor;
+    }
+
+    public function setEditor($editor): self
+    {
+        $this->editor = $editor;
 
         return $this;
     }
