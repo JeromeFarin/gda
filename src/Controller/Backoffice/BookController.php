@@ -3,6 +3,7 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use App\Form\BookType;
 use App\Handler\BookHandler;
 use App\Repository\BookRepository;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/book")
@@ -19,10 +21,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class BookController extends AbstractController
 {
     private BookHandler $bookHandler;
+    private ValidatorInterface $validator;
 
-    public function __construct(BookHandler $bookHandler)
+    public function __construct(BookHandler $bookHandler, ValidatorInterface $validator)
     {
         $this->bookHandler = $bookHandler;
+        $this->validator = $validator;
     }
 
     /**
@@ -41,8 +45,32 @@ class BookController extends AbstractController
     public function new(Request $request): Response
     {
         $book = new Book();
-        $form = $this->createForm(BookType::class, $book);
-        $form->handleRequest($request);
+
+        if ($bookRequest = $request->request->get('book')) {
+            foreach ($bookRequest['categories'] as &$idCategory) {
+                $idCategory = $this->getDoctrine()->getRepository(Category::class)->find((int) $idCategory);
+            }
+
+            $request->request->set('book', $bookRequest);
+        }
+
+        $form = $this->createForm(BookType::class, $book)->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            /** @var Book $book */
+            $book = $form->getData();
+            $data = $request->request->get('book');
+
+            foreach ($data['categories'] as $category) {
+                $book->addCategory($category);
+            }
+
+            if ($this->validator->validate($book)) {
+                $this->bookHandler->persist($book);
+
+                return $this->redirectToRoute('book_index');
+            }
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->bookHandler->persist($book);
@@ -71,13 +99,30 @@ class BookController extends AbstractController
      */
     public function edit(Request $request, Book $book): Response
     {
-        $form = $this->createForm(BookType::class, $book);
-        $form->handleRequest($request);
+        if ($bookRequest = $request->request->get('book')) {
+            foreach ($bookRequest['categories'] as &$idCategory) {
+                $idCategory = $this->getDoctrine()->getRepository(Category::class)->find((int) $idCategory);
+            }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->bookHandler->persist($book);
+            $request->request->set('book', $bookRequest);
+        }
 
-            return $this->redirectToRoute('book_index');
+        $form = $this->createForm(BookType::class, $book)->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            /** @var Book $book */
+            $book = $form->getData();
+            $data = $request->request->get('book');
+
+            foreach ($data['categories'] as $category) {
+                $book->addCategory($category);
+            }
+
+            if ($this->validator->validate($book)) {
+                $this->bookHandler->persist($book);
+
+                return $this->redirectToRoute('book_index');
+            }
         }
 
         return $this->render('backoffice/book/edit.html.twig', [
