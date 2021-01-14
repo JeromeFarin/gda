@@ -19,22 +19,32 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param string|null $s
+     * @param string|null $dir
+     * @param string|null $amount
+     */
+    public function findByFilter(?string $s = null, ?string $dir = null, ?string $amount = null)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->createQueryBuilder('b')
+            ->orderBy('b.id', 'DESC')
+            ->setMaxResults(5);
+
+        if ($s) {
+            $query
+                ->andWhere('b.title LIKE :s')
+                ->orWhere('b.isbn LIKE :s')
+                ->setParameter('s', '%' . $s . '%');
+        }
+
+        if ($dir && $amount) {
+            $query
+                ->andWhere("b.price $dir :amount")
+                ->setParameter(':amount', $amount);
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Book
@@ -46,5 +56,5 @@ class BookRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+     */
 }

@@ -4,4 +4,18 @@
 
 {% block body %}
     <p>Je suis un texte avec très peu d'inspiration</p>
+
+    <form>
+        <div class="form-group">
+          <input type="text" class="form-control" name="s">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{{ path('book_show_front', {id: book.id, slug: book.slug}) }}">{{ book.isbn }} - {{ book.title }}</a> {{ book.price }}$
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
