@@ -11,4 +11,8 @@
         <i>{{ book.isbn }}</i>
     </p>
     <em>{{ book.price }}$</em>
+
+    {% if app.user.id is defined %}
+        <div id="react_like" data-id-book={{ book.id }} data-id-user={{ app.user.id }}></div>
+    {% endif %}
 {% endblock %}

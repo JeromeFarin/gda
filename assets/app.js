@@ -10,3 +10,11 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import React from "react";
+import ReactDOM from "react-dom";
+import Like from './Like/Like';
+
+const reactLike = document.getElementById('react_like');
+if (reactLike) {
+    ReactDOM.render(<Like idBook={reactLike.dataset.idBook} idUser={reactLike.dataset.idUser}/>, reactLike);
+}

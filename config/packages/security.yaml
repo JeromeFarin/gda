@@ -1,5 +1,6 @@
 security:
     encoders:
+        Symfony\Component\Security\Core\User\User: 'auto'
         App\Entity\User:
             algorithm: auto
 
@@ -10,7 +11,30 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        jwt_users:
+            memory:
+                users:
+                    admin: { password: '$argon2id$v=19$m=65536,t=4,p=1$L/wU7SV9q9OsM+JNh2AgRg$FP/3be4DqXA2LoIqhduC2anOJEGmon2bLBeTDA/eBYs' }
+        
     firewalls:
+        login:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            provider: jwt_users
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: jwt_users
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -35,5 +59,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
