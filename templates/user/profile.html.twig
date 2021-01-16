@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <h2>{{ user.email }}</h2>
+
+    {% if user.likes|length %}
+        <h3>Your likes</h3>
+        <ul>
+            {% for like in user.likes %}
+                <li>
+                    <a href="{{ path('book_show_front', {id: like.book.id, slug: like.book.slug}) }}">{{ like.book.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h3>Admin manager</h3>
+        <nav class="nav">
+            <a class="nav-link" href="{{ path('book_index') }}">Book</a>
+            <a class="nav-link" href="{{ path('editor_index') }}">Editor</a>
+            <a class="nav-link" href="{{ path('author_index') }}">Author</a>
+            <a class="nav-link" href="{{ path('category_index') }}">Category</a>
+        </nav>
+    {% endif %}
+{% endblock %}

@@ -2,15 +2,6 @@
     <div class="jumbotron">
         <div class="container d-flex justify-content-between">
             <em>Copyright</em>
-            
-            {% if is_granted('ROLE_ADMIN') %}
-                <nav class="nav justify-content-center">
-                    <a class="nav-link" href="{{ path('book_index') }}">Book</a>
-                    <a class="nav-link" href="{{ path('editor_index') }}">Editor</a>
-                    <a class="nav-link" href="{{ path('author_index') }}">Author</a>
-                    <a class="nav-link" href="{{ path('category_index') }}">Category</a>
-                </nav>
-            {% endif %}
 
             <ul class="d-flex">
                 <li><span class="material-icons">facebook</span></li>
