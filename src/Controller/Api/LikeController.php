@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Repository\BookRepository;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +31,8 @@ class LikeController extends AbstractController
             [
                 AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
                     return $object->getId();
-                }
+                },
+                AbstractNormalizer::IGNORED_ATTRIBUTES => ['books']
             ]
         );
     }
@@ -49,7 +49,8 @@ class LikeController extends AbstractController
             [
                 AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
                     return $object->getId();
-                }
+                },
+                AbstractNormalizer::IGNORED_ATTRIBUTES => ['books']
             ]
         );
     }
