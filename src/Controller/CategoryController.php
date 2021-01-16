@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/{id}/{slug}", name="category_show_front", methods={"GET"})
+     * @Route("/{id}/{slug}", name="category_show_front", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Category $category): Response
     {
