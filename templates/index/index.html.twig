@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home page{% endblock %}
+{% block title %}{% trans %}Home page{% endtrans %}{% endblock %}
 
 {% block body %}
-    <p class="home-message">Welcome to this project, you have the opportunity to find your favorite books.</p>
+    <p class="home-message">{% trans %}Welcome to this project, you have the opportunity to find your favorite books.{% endtrans %}</p>
 
     <form id="search">
         <div class="input-group mb-3">
-            <input type="text" class="form-control"  name="s" placeholder="Book title or isbn" aria-label="Book title or isbn" aria-describedby="basic-addon1">
+            <input type="text" class="form-control"  name="s" placeholder="{% trans %}Book title or isbn{% endtrans %}" aria-label="{% trans %}Book title or isbn{% endtrans %}" aria-describedby="basic-addon1">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary">{% trans %}Search{% endtrans %}</button>
             </div>
         </div>
     </form>

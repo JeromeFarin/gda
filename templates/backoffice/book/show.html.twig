@@ -1,42 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book{% endblock %}
+{% block title %}{% trans %}Book{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Book</h1>
+    <h1>{% trans %}Book{% endtrans %}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>{% trans %}Id{% endtrans %}</th>
                 <td>{{ book.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>{% trans %}Title{% endtrans %}</th>
                 <td>{{ book.title }}</td>
             </tr>
             <tr>
-                <th>Slug</th>
+                <th>{% trans %}Slug{% endtrans %}</th>
                 <td>{{ book.slug }}</td>
             </tr>
             <tr>
-                <th>Isbn</th>
+                <th>{% trans %}Isbn{% endtrans %}</th>
                 <td>{{ book.isbn }}</td>
             </tr>
             <tr>
-                <th>Resume</th>
+                <th>{% trans %}Resume{% endtrans %}</th>
                 <td>{{ book.resume }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>{% trans %}Price{% endtrans %}</th>
                 <td>{{ book.price }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('book_edit', {'id': book.id}) }}" class="btn btn-primary">Edit</a>
+    <a href="{{ path('book_edit', {'id': book.id}) }}" class="btn btn-primary">{% trans %}Edit{% endtrans %}</a>
 
-    <a href="{{ path('book_index') }}" class="btn btn-secondary">back to list</a>
+    <a href="{{ path('book_index') }}" class="btn btn-secondary">{% trans %}back to list{% endtrans %}</a>
 
     {{ include('backoffice/book/_delete_form.html.twig') }}
 {% endblock %}

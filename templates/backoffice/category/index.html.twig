@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}{% trans %}Categories{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+    <h1>{% trans %}Categories{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Level</th>
-                <th>actions</th>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Slug{% endtrans %}</th>
+                <th>{% trans %}Level{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,11 +29,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('category_new') }}" class="btn btn-primary">Create new</a>
+    <a href="{{ path('category_new') }}" class="btn btn-primary">{% trans %}Create new{% endtrans %}</a>
 {% endblock %}

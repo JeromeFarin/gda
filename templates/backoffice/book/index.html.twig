@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index{% endblock %}
+{% block title %}{% trans %}Books{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+    <h1>{% trans %}Books{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Isbn</th>
-                <th>Resume</th>
-                <th>Price</th>
-                <th>actions</th>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Title{% endtrans %}</th>
+                <th>{% trans %}Slug{% endtrans %}</th>
+                <th>{% trans %}Isbn{% endtrans %}</th>
+                <th>{% trans %}Resume{% endtrans %}</th>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +33,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('book_new') }}" class="btn btn-primary mb-4">Create new</a>
+    <a href="{{ path('book_new') }}" class="btn btn-primary mb-4">{% trans %}Create new{% endtrans %}</a>
 {% endblock %}

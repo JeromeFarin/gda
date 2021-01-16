@@ -11,9 +11,9 @@
             </nav>
             <div>
                 {% if app.user.id is defined %}
-                    <a href="{{ path('profile', {id: app.user.id}) }}">{{app.user.email}}</a> |  <a href="{{ path('app_logout') }}">Logout</a>
+                    <a href="{{ path('profile', {id: app.user.id}) }}">{{app.user.email}}</a> |  <a href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}">Login</a>
+                    <a href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
                 {% endif %}
             </div>
         </div>

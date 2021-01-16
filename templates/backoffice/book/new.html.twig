@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Book{% endblock %}
+{% block title %}{% trans %}New Book{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Create new Book</h1>
+    <h1>{% trans %}Create new Book{% endtrans %}</h1>
 
     {{ include('backoffice/book/_form.html.twig') }}
 
-    <a href="{{ path('book_index') }}" class="btn btn-secondary mt-2 mb-4">back to list</a>
+    <a href="{{ path('book_index') }}" class="btn btn-secondary mt-2 mb-4">{% trans %}back to list{% endtrans %}</a>
 {% endblock %}

@@ -1,0 +1,55 @@
+Home page: Page d'accueil
+Logout: Deconnexion
+Login: Connexion
+Book title or isbn: Titre ou isbn du livre
+Welcome to this project, you have the opportunity to find your favorite books.: Bienvenue dans ce projet, vous avez la possibilité de trouver vos livres préférés.
+Search: Rechercher
+Email: Email
+Password: Mot de passe
+Your likes: Vos j'aime
+Admin manager: Administration
+Book: Livre
+Editor: Editeur
+Author: Auteur
+Category: Catégorie
+Books: Livres
+Id: Id
+Title: Titre
+Slug: Slug
+Isbn: Isbn
+Resume: Résumé
+Price: Prix
+actions: actions
+Create new: Créer un nouveau
+New Book: Nouveau livre
+Create new Book: Création d'un nouveau livre
+No editor: Pas d'éditeur
+Categories: Catégories
+Save: Enregistrer
+back to list: retour à la liste
+Edit: Modifier
+Delete: Supprimer
+Are you sure you want to delete this item?: Etes-vous sur de vouloir supprimer cette item?
+Edit Book: Modification du livre
+no records found: pas d'elements trouvé
+Editors: Editeurs
+Name: Nom
+FoundationYear: Année de fondation
+Foundation year: Année de fondation
+New Editor: Nouvel éditeur
+Create new Editor: Création d'un nouvel éditeur
+Edit Editor: Modification éditeur
+Authors: Auteurs
+Firstname: Nom
+Lastname: Prénom
+Birthday: Anniversaire
+New Author: Nouvel auteur
+Create new Author: Création nouvel auteur
+Year: Année
+Month: Mois
+Day: Jour
+Edit Author: Modification auteur
+Level: Niveau
+New Category: Nouvel catégorie
+Create new Category: Création nouvel catégorie
+Edit Category: Modification catégorie
