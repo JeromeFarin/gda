@@ -3,17 +3,14 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ book.title }}</h1>
+    <h1>{{ book.title }} ({{ book.isbn }})</h1>
     {{ categories|join(' - ') }}
 
-    <p>{{ book.resume }}</p>
+    <p class="mt-4">{{ book.resume }}</p>
 
-    <p>
-        <i>{{ book.isbn }}</i>
-    </p>
     <em>{{ book.price }}$</em>
 
     {% if app.user.id is defined %}
-        <div id="react_like" data-id-book={{ book.id }} data-id-user={{ app.user.id }}></div>
+        <div id="react_like" data-id-book={{ book.id }} data-id-user={{ app.user.id }} class="mt-2"></div>
     {% endif %}
 {% endblock %}

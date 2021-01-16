@@ -30,7 +30,7 @@ class IndexController extends AbstractController
         }
 
         return $this->render('index/index.html.twig', [
-            'books' => $bookRepository->findByFilter($s, $dir, $amount)
+            'books' => $bookRepository->findByFilter($s, $dir, $amount),
         ]);
     }
 }

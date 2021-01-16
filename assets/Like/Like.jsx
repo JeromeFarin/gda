@@ -71,7 +71,7 @@ export default function Like({ idBook, idUser }) {
     }
 
     return (
-        <>
+        <div className="d-flex">
             <span
                 className="material-icons"
                 onClick={_handleClick}
@@ -79,7 +79,7 @@ export default function Like({ idBook, idUser }) {
             >
                 thumb_up
             </span>
-            <em>{likes.length}</em>
-        </>
+            <em className="ml-2">{likes.length}</em>
+        </div>
     )
 }

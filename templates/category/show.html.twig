@@ -5,10 +5,15 @@
 {% block body %}
     <h1>{{ category.name }}</h1>
 
-    <ul>
+    <ul class="book-list">
         {% for book in category.books %}
-            <li>
-                <a href="{{ path('book_show_front', {id: book.id, slug: book.slug}) }}">{{ book.isbn }} - {{ book.title }}</a> {{ book.price }}$
+            <li class="card mb-2">
+                <div>
+                    <a href="{{ path('book_show_front', {id: book.id, slug: book.slug}) }}">{{ book.title }} ({{ book.isbn }})</a>
+                </div>
+                <div>
+                    <span>{{ book.price }}$</span>
+                </div>
             </li>
         {% endfor %}
     </ul>

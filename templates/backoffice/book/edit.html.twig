@@ -7,7 +7,7 @@
 
     {{ include('backoffice/book/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('book_index') }}">back to list</a>
+    <a href="{{ path('book_index') }}" class="btn btn-secondary mt-2">back to list</a>
 
     {{ include('backoffice/book/_delete_form.html.twig') }}
 {% endblock %}

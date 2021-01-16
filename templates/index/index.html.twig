@@ -3,18 +3,26 @@
 {% block title %}Home page{% endblock %}
 
 {% block body %}
-    <p>Je suis un texte avec très peu d'inspiration</p>
+    <p class="home-message">Welcome to this project, you have the opportunity to find your favorite books.</p>
 
-    <form>
-        <div class="form-group">
-          <input type="text" class="form-control" name="s">
+    <form id="search">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control"  name="s" placeholder="Book title or isbn" aria-label="Book title or isbn" aria-describedby="basic-addon1">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
     </form>
-    <ul>
+
+    <ul class="book-list">
         {% for book in books %}
-            <li>
-                <a href="{{ path('book_show_front', {id: book.id, slug: book.slug}) }}">{{ book.isbn }} - {{ book.title }}</a> {{ book.price }}$
+            <li class="card mb-2">
+                <div>
+                    <a href="{{ path('book_show_front', {id: book.id, slug: book.slug}) }}">{{ book.title }} ({{ book.isbn }})</a>
+                </div>
+                <div>
+                    <span>{{ book.price }}$</span>
+                </div>
             </li>
         {% endfor %}
     </ul>

@@ -27,8 +27,8 @@
                 <td>{{ book.resume }}</td>
                 <td>{{ book.price }}</td>
                 <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                    <a href="{{ path('book_show', {'id': book.id}) }}"><span class="material-icons">visibility</span></a>
+                    <a href="{{ path('book_edit', {'id': book.id}) }}"><span class="material-icons">edit</span></a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('book_new') }}">Create new</a>
+    <a href="{{ path('book_new') }}" class="btn btn-primary mb-4">Create new</a>
 {% endblock %}

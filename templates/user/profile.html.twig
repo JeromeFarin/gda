@@ -7,9 +7,10 @@
 
     {% if user.likes|length %}
         <h3>Your likes</h3>
-        <ul>
+
+        <ul class="book-list">
             {% for like in user.likes %}
-                <li>
+                <li class="card mb-2">
                     <a href="{{ path('book_show_front', {id: like.book.id, slug: like.book.slug}) }}">{{ like.book.title }}</a>
                 </li>
             {% endfor %}

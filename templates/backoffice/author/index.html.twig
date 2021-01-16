@@ -23,8 +23,8 @@
                 <td>{{ author.lastname }}</td>
                 <td>{{ author.birthday ? author.birthday|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('author_show', {'id': author.id}) }}">show</a>
-                    <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+                    <a href="{{ path('author_show', {'id': author.id}) }}"><span class="material-icons">visibility</span></a>
+                    <a href="{{ path('author_edit', {'id': author.id}) }}"><span class="material-icons">edit</span></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('author_new') }}">Create new</a>
+    <a href="{{ path('author_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}
