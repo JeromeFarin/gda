@@ -54,7 +54,6 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -64,7 +63,7 @@ class Book
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="book")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="book", cascade={"persist", "remove"})
      */
     private $likes;
 

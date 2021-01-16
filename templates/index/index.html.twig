@@ -7,7 +7,7 @@
 
     <form id="search">
         <div class="input-group mb-3">
-            <input type="text" class="form-control"  name="s" placeholder="{% trans %}Book title or isbn{% endtrans %}" aria-label="{% trans %}Book title or isbn{% endtrans %}" aria-describedby="basic-addon1">
+            <input type="text" class="form-control"  name="s" placeholder="{% trans %}Book title or isbn{% endtrans %}" aria-label="{% trans %}Book title or isbn{% endtrans %}" aria-describedby="basic-addon1" value="{{ search }}">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary">{% trans %}Search{% endtrans %}</button>
             </div>
