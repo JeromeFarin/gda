@@ -14,8 +14,13 @@ class BookController extends AbstractController
      */
     public function show(Book $book): Response
     {
+        $categories = array_map(function ($category) {
+            return $category->getName();
+        }, $book->getCategories()->toArray());
+
         return $this->render('book/show.html.twig', [
             'book' => $book,
+            'categories' => $categories
         ]);
     }
 }

@@ -17,7 +17,8 @@ class CategoryFixture extends Fixture
             $category = new Category();
             $category
                 ->setName($faker->firstName())
-                ->setSlug($faker->slug());
+                ->setSlug($faker->slug())
+                ->setLevel($faker->numberBetween(0, 1));
 
             $manager->persist($category);
         }

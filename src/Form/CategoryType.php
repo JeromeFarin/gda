@@ -13,7 +13,8 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug');
+            ->add('slug')
+            ->add('level');
     }
 
     public function configureOptions(OptionsResolver $resolver)
